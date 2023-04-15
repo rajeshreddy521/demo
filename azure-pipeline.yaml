@@ -9,10 +9,11 @@ jobs:
   steps:
   - checkout: self
   
+
   - task: AzureCLI@2
     displayName: 'Login to Azure'
     inputs:
-      azureSubscription: 'Your-Azure-Subscription'
+      azureSubscription: 'ADO-Azure(025-Dev-App-1)-Service Connection'
       scriptType: 'bash'
       scriptLocation: 'inlineScript'
       inlineScript: |

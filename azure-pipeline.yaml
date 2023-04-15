@@ -1,0 +1,30 @@
+trigger: none
+pr: none
+
+jobs:
+- job: Testing
+  displayName: 'Testing Azure Conection'
+  pool:
+    vmImage: 'ubuntu-latest'
+  steps:
+  - checkout: self
+  
+  - task: AzureCLI@2
+    displayName: 'Login to Azure'
+    inputs:
+      azureSubscription: 'Your-Azure-Subscription'
+      scriptType: 'bash'
+      scriptLocation: 'inlineScript'
+      inlineScript: |
+        az login --tenant $(tenant_id)
+        az account set --subscription $(subscription_id)
+        az group list --output table
+        echo "Azure connection successful!"
+
+  - task: checkout@2
+    displayName: 'Checkout GitHub repository'
+    inputs:
+      repository: 'https://github.dev.global.tesco.org/INE12404019/demo.it'
+      connection: 'ADO-GitHub-SC-PAT'
+      refName: 'refs/heads/main'
+      clean: true

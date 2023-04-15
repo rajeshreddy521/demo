@@ -1,5 +1,5 @@
-trigger: none
-pr: none
+trigger: 
+ - main
 
 jobs:
 - job: Testing
